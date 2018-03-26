@@ -6,5 +6,6 @@ public class Test{
 		Entrada entrada = new Entrada( edificio, elevador );
 		Salida salida = new Salida( edificio, elevador );
 		System.out.println( "Presionar Ctrl + c para terminar" );
+		System.out.println( "Numero total de inquilino: " + edificio.getTotalPersonas() );
 	}
 }
