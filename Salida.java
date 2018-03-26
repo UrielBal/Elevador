@@ -1,3 +1,7 @@
+/**
+ *
+ * @author los Armandos
+ */
 public class Salida implements Runnable{
 	private Edificio edificio;
 	private Elevador elevador;

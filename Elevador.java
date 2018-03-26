@@ -11,7 +11,6 @@ public class Elevador {
     private int numeroPersonas;
     private final String [] ESTADOS = { "ESPERA", "SUBIENDO", "BAJANDO" };
     private String estadoActual;
-    private boolean solicitud;
     
     /*
     * Crea un nuevo elevador en el piso 0 (planta baja)
@@ -47,20 +46,12 @@ public class Elevador {
     	return this.estadoActual;
     }
 
-    public boolean getSolicitud(){
-    	return this.solicitud;
-    }
-
     public void setPisoActual( int piso ){
     	this.pisoActual = piso;
     }
 
     public void setEstadoActual( String estado ){
     	this.estadoActual = estado;
-    }
-
-    public void setSolicitud( boolean solicitud ){
-    	this.solicitud = solicitud;
     }
 
     public void setNumeroPeronas( int n ){

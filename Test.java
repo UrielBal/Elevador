@@ -1,3 +1,7 @@
+/**
+ *
+ * @author los Armandos
+ */
 public class Test{
 	public static void main( String [] args ){
 		Edificio edificio = new Edificio();
