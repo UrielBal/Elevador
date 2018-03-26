@@ -21,7 +21,6 @@ public class Elevador {
     	this.pisoActual = 0;
     	this.numeroPersonas = 0;
     	this.estadoActual = ESTADOS[ 0 ];
-    	this.solicitud = false;
     	this.personas = new Persona[ 5 ]; 
     }
 
