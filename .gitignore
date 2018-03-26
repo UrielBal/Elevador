@@ -1,0 +1,3 @@
+#Ignoramos todos los .class
+
+*.class

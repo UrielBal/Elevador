@@ -1,55 +1,89 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package elevador;
-
-import java.util.Random;
-import java.util.Scanner;
-
 /**
  *
  * @author los armandos
  */
+
 public class Edificio {
 
-    private static int cantidadPisos;
-    private static int cantidadDepas;
-    private static int cantidadPeople;
-    Random ran;
-    Scanner leer;
+    private  final int PISOS = 6;
+    private  final int NUMERO_DEPARTAMENTOS = 4;
+    private  int [][] cantidadPersonas = new int[ PISOS ][ NUMERO_DEPARTAMENTOS ];
+    private Persona [] personas;
+    private int totalPersonas;
 
-    //Asignarle el cero al piso inicial y asignar el ingresado por el ususario
+    /*
+    * Se crea un nuevo edificio asignando aleatoriamente
+    * la cantidad de inquilinos por cada departamento.
+    */
+
     public Edificio() {
-        leer = new Scanner(System.in);
-        int pisoActual = 0;
-        System.out.println("Dime el piso actual");
-        pisoActual = leer.nextInt();
-        PisoActual(pisoActual);
+    	int contador;
+    	this.totalPersonas = 0;
+    	for( int i = 0; i < PISOS; i++ )
+    		for( int j = 0; j < NUMERO_DEPARTAMENTOS; j++ ){
+    			contador = (int) ( ( Math.random() * 4 ) + 1);
+    			totalPersonas += contador;
+    			cantidadPersonas[ i ][ j ] = contador;
+    		}
+    	this.personas = new Persona[ this.totalPersonas ];
+    	this.generarPersonas();
+
     }
 
-    //Generas aleatoriamente la cantidad de personas que van en el elevador
-    public int cantidadPersonas() {
-        ran = new Random();
-        cantidadPeople = ran.nextInt(4) + 1;
-        return cantidadPeople;
+    //Retorna la cantidad de pisos del edificio.
+    public int getPisos() {
+        return this.PISOS;
     }
 
-    //Retornas el piso en el que estás
-    public int getPisoActual() {
-        return cantidadPisos;
+    public int getDepartamentos(){
+    	return this.NUMERO_DEPARTAMENTOS;
     }
 
-    //Asignas el valor del piso en el que estás
-    public void PisoActual(int piso) {
-        cantidadPisos = piso;
+    public int [][] getCantidadPersonas(){
+    	return this.cantidadPersonas;
     }
 
-    //Cantidad de departamentos
-    public int cantDepas() {
-        cantidadDepas = 4;
-        return cantidadDepas;
+    public int getTotalPersonas(){
+    	return this.totalPersonas;
     }
 
+
+    //Se definen metodos, algunos privados, nos ayudaran a hacer un mejor manejo
+    //de los objetos Persona.
+    private void generarPersonas(){
+    	int contador = 0;
+    	for( int i = 0; i < PISOS; i++ )
+    		for( int j = 0; j < NUMERO_DEPARTAMENTOS; j++ )
+    			for( int k = 0; k < cantidadPersonas[ i ][ j ]; k++ )
+    				personas[ contador++ ] = new Persona( i+1, j+1 );
+    }
+
+    //Ordenamiento burbuja ;3
+    public void ordenarPersonasSalida(){
+    	Persona auxiliar;
+    	for( int i = 0; i < totalPersonas; i++ )
+    		for( int j = 1; j < totalPersonas - i; j ++ ){
+    			if( personas[ j - 1].getHoraSalida() > personas[ j ].getHoraSalida()  ){
+    				auxiliar = personas[ j - 1 ];
+    				personas[ j - 1 ] = personas[ j ];
+    				personas[ j ] = auxiliar;
+    			}
+    		}
+    }
+
+    public void ordenarPersonasEntrada(){
+    	Persona auxiliar;
+    	for( int i = 0; i < totalPersonas; i++ )
+    		for( int j = 1; j < totalPersonas - i; j ++ ){
+    			if( personas[ j - 1].getHoraLlegada() > personas[ j ].getHoraLlegada()  ){
+    				auxiliar = personas[ j - 1 ];
+    				personas[ j - 1 ] = personas[ j ];
+    				personas[ j ] = auxiliar;
+    			}
+    		}
+    }
+
+    public Persona getPersona( int n ){
+    	return this.personas[ n ];
+    }
 }
